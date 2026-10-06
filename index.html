@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chronos Express</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#14201f">
+  <meta name="description" content="Tap the engine, add passenger cars, and keep the Chronos Express running, even while you're away.">
+
+  <!-- Full-screen / installed-app behaviour -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Chronos Express">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hud">
+      <p class="hud-label">Tickets</p>
+      <p class="balance" id="balance" aria-live="polite">0</p>
+      <p class="rate"><span id="rate">0</span> tickets/sec</p>
+    </header>
+
+    <section class="stage" aria-label="Train">
+      <div class="track">
+        <div class="train" id="train">Train placeholder</div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <button class="engine" id="engine" type="button">Engine<small>Tap for +1 ticket</small></button>
+    </section>
+
+    <section class="upgrades" aria-labelledby="upgrades-title">
+      <h2 id="upgrades-title">Upgrades</h2>
+      <div class="upgrade">
+        <div class="upgrade-info">
+          <p class="upgrade-name">Passenger Car <span class="owned" id="owned">0</span></p>
+          <p class="upgrade-desc">+1 ticket per second each</p>
+        </div>
+        <button class="buy" id="buy-car" type="button">Buy<small id="car-cost">15</small></button>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay" id="welcome" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+      <h2 id="welcome-title">Welcome back</h2>
+      <p>You were away for <strong id="away-time"></strong>.</p>
+      <p class="earned">+<span id="away-earned"></span> tickets</p>
+      <button class="engine modal-btn" id="welcome-close" type="button">Back on board</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
