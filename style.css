@@ -1,0 +1,141 @@
+:root {
+  --ink: #14201f;
+  --track: #22332f;
+  --panel: #1b2a28;
+  --brass: #d9a441;
+  --brass-dark: #a97a22;
+  --steam: #ebe6d8;
+  --muted: #8fa19b;
+  --disabled: #34443f;
+}
+
+* { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  background: var(--ink);
+  color: var(--steam);
+  font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  overscroll-behavior: none;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action: manipulation; }
+button:focus-visible { outline: 3px solid var(--steam); outline-offset: 2px; }
+
+.app {
+  height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 12px);
+  gap: 12px;
+}
+
+/* Balance */
+.hud { text-align: center; }
+.hud-label { color: var(--muted); font-size: 0.95rem; }
+.balance { font-size: clamp(2.6rem, 14vw, 4rem); font-weight: 700; color: var(--brass); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.rate { color: var(--muted); font-size: 0.95rem; }
+
+/* Train placeholder */
+.stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.track {
+  width: 100%;
+  padding-bottom: 14px;
+  border-bottom: 6px dashed var(--track);
+  display: flex;
+  justify-content: center;
+}
+.train {
+  width: 78%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--brass);
+  border-radius: 6px;
+  background: rgba(217, 164, 65, 0.1);
+  color: var(--brass);
+  font-size: 0.95rem;
+  transition: transform 0.08s ease-out;
+}
+.train.bump { transform: translateX(6px); }
+
+/* Engine button */
+.engine {
+  width: 100%;
+  padding: 20px 16px;
+  border-radius: 14px;
+  background: var(--brass);
+  color: var(--ink);
+  font-size: 1.6rem;
+  font-weight: 700;
+  box-shadow: 0 5px 0 var(--brass-dark);
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+.engine small { display: block; font-size: 0.85rem; font-weight: 400; margin-top: 2px; }
+.engine:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--brass-dark); }
+
+/* Upgrades */
+.upgrades { background: var(--panel); border-radius: 14px; padding: 14px; }
+.upgrades h2 { font-size: 1.1rem; margin-bottom: 10px; }
+.upgrade { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.upgrade-name { font-weight: 700; }
+.owned { color: var(--brass); margin-left: 6px; font-variant-numeric: tabular-nums; }
+.upgrade-desc { color: var(--muted); font-size: 0.9rem; }
+.buy {
+  min-width: 96px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--steam);
+  color: var(--ink);
+  font-weight: 700;
+}
+.buy small { display: block; font-size: 0.85rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+.buy:disabled { background: var(--disabled); color: var(--muted); cursor: not-allowed; }
+.buy:not(:disabled):active { transform: scale(0.97); }
+
+/* Floating +1 */
+.float {
+  position: fixed;
+  pointer-events: none;
+  color: var(--steam);
+  font-weight: 700;
+  font-size: 1.4rem;
+  animation: rise 0.8s ease-out forwards;
+}
+@keyframes rise { to { transform: translateY(-60px); opacity: 0; } }
+
+/* Welcome back popup */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 16, 15, 0.8);
+}
+.overlay[hidden] { display: none; }
+.modal {
+  width: 100%;
+  max-width: 340px;
+  padding: 24px;
+  text-align: center;
+  background: var(--panel);
+  border: 2px solid var(--brass);
+  border-radius: 16px;
+}
+.modal h2 { font-size: 1.6rem; margin-bottom: 10px; }
+.earned { margin: 10px 0 20px; font-size: 2rem; font-weight: 700; color: var(--brass); }
+.modal-btn { font-size: 1.15rem; padding: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float { animation-duration: 0.01s; }
+  .train, .engine { transition: none; }
+}
